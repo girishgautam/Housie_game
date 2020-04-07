@@ -7,7 +7,7 @@ BOTTOM_LINE = "Bottom Line"
 FULL_HOUSE = "Full House"
 
 def generate_ticket():
-    
+    # generate a list of 3 list of 5 random numbers each.
     print()
     ticket = [sorted(random.sample(range(1+(33*x), 33+(33*x+1)), 5)) for x in range(3)]
             
@@ -25,7 +25,7 @@ def generate_ticket():
      
 def board_display(prev_numbers):
     board = range(0, 100)
-    curr_num = prev_numbers[-1]
+    curr_num = prev_numbers[-1] # track the current number 
     chunks = [board[x*10:(x*10)+10] for x in range(0, 10)]
     
     for chunk in chunks:
@@ -33,6 +33,7 @@ def board_display(prev_numbers):
         for num in chunk:
             if num+1 in prev_numbers:
                 if num+1 == curr_num:
+                    # highlight the current number on board with brackets '()'
                     print("({:02d})|".format(num+1),end="")
                 else:
                     print(" {:02d} |".format(num+1),end="")
@@ -52,6 +53,7 @@ def main():
     player_num_of_tickets = {}
     
     while len(player_num_of_tickets.keys()) < num_of_players:
+        
         for i in range(num_of_players):
             player = input("Please enter the name of player number " + str(i+1) + '- ')
             no_of_tickets = input("How many tickets do you want {0}? ".format(player))
