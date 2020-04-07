@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Apr  4 20:55:47 2020
-
-@author: G&S
-"""
 import random
 
 FAST_FIVE = "Fast Five"
@@ -13,27 +7,27 @@ BOTTOM_LINE = "Bottom Line"
 FULL_HOUSE = "Full House"
 
 def generate_ticket():
-    ticket_numbers1 = random.sample(range(1, 31), 5)
-    ticket_numbers2 = random.sample(range(31, 61), 5)
-    ticket_numbers3 = random.sample(range(61, 100), 5)    
     
-    ticket = [ticket_numbers1,ticket_numbers2,ticket_numbers3]
-    marked_ticket = []    
+    print()
+    ticket = [sorted(random.sample(range(1+(33*x), 33+(33*x+1)), 5)) for x in range(3)]
+            
+    # This will show the ticket in Housie format
+    for e in ticket:
+        print('|', '|'.join(map(str, e)), '|', sep='')
+        print()
     
+    # This will show the ticket for computing
+    marked_ticket = []
     for index,line in enumerate(ticket):
-        print("|",end="")
         for number in line:
             marked_ticket.append([index, number, False])
-            print(" {:02d} |".format(number),end="")
-        print()
-        print()
     return marked_ticket 
      
 def board_display(prev_numbers):
     board = range(0, 100)
     curr_num = prev_numbers[-1]
     chunks = [board[x*10:(x*10)+10] for x in range(0, 10)]
-    # print(chunks)
+    
     for chunk in chunks:
         print("|",end="")
         for num in chunk:
@@ -130,9 +124,11 @@ def main():
         else:
             input()
         
-    print("Results:/n")
+    print("Results:-")
     #print(player_tickets)    
     print(benchmarks_Winner)
+    print()
+    print('Amount won:-')
     print(benchmarks_Prize)
 
 def mark_tickets(curr_num, player_tickets):
@@ -177,7 +173,7 @@ def row_winner(player_tickets, benchmark):
             
             if flag == False:
                 print("{0} is the winner of {2} for ticket number {1}!!".format(player, index+1, benchmark))
-                #print(ticket)
+                print(ticket)
                 return player          
 
    
